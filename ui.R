@@ -1,0 +1,155 @@
+#
+# This is the user-interface definition of a Shiny web application. You can
+# run the application by clicking 'Run App' above.
+#
+# Find out more about building applications with Shiny here:
+# 
+#    http://shiny.rstudio.com/
+#
+
+shinyUI(pageWithSidebar(
+        
+        # Application title
+        headerPanel("What did I miss in the NASDAQ stock exchange?"),
+        
+        # Sidebar with a slider input for number of observations
+        sidebarPanel(
+
+                helpText("This app helps feel bad for not being invested in stock markets. What if you had skipped that one expensive drink?"),
+                helpText("Select your NASDAQ-stock, the amount invested and the timeframe."),
+
+                sliderInput("date.range", 
+                            "Choose Date Range:", 
+                            min = as.Date("2000-01-01"), 
+                            max = Sys.Date(), 
+                            value = c(as.Date("2000-01-01"), Sys.Date())),
+                
+                sliderInput("start.capital", 
+                            "Initial capital invested :", 
+                            min = 0, 
+                            max = 1000, 
+                            value = 50,
+                            step = 50,
+                            locale="us"),
+                
+                
+                selectInput("select.stock", 
+                            "Select Stock", 
+                            c("Activision Blizzard Inc" = "ATVI",
+                              "Adobe Systems Incorporated" = "ADBE",
+                              "Alexion Pharmaceuticals Inc." = "ALXN",
+                              "Align Technology Inc. " = "ALGN",
+                              "Alphabet Inc. " = "GOOG",
+                              "Alphabet Inc. " = "GOOGL",
+                              "Amazon.com Inc." = "AMZN",
+                              "American Airlines Group Inc." = "AAL",
+                              "Amgen Inc." = "AMGN",
+                              "Analog Devices Inc." = "ADI",
+                              "Apple Inc." = "AAPL",
+                              "Applied Materials Inc." = "AMAT",
+                              "ASML Holding N.V. " = "ASML",
+                              "Autodesk Inc. " = "ADSK",
+                              "Automatic Data Processing Inc." = "ADP",
+                              "Baidu Inc." = "BIDU",
+                              "Biogen Inc." = "BIIB",
+                              "BioMarin Pharmaceutical Inc." = "BMRN",
+                              "Booking Holdings Inc. " = "BKNG",
+                              "Broadcom Inc. " = "AVGO",
+                              "CA Inc." = "CA ",
+                              "Cadence Design Systems Inc." = "CDNS",
+                              "Celgene Corporation" = "CELG",
+                              "Cerner Corporation" = "CERN",
+                              "Charter Communications Inc." = "CHTR",
+                              "Check Point Software Technologies Ltd." = "CHKP",
+                              "Cintas Corporation" = "CTAS",
+                              "Cisco Systems Inc." = "CSCO",
+                              "Citrix Systems Inc." = "CTXS",
+                              "Cognizant Technology Solutions Corporation" = "CTSH",
+                              "Comcast Corporation" = "CMCSA",
+                              "Costco Wholesale Corporation" = "COST",
+                              "CSX Corporation" = "CSX",
+                              "Ctrip.com International Ltd." = "CTRP",
+                              "DENTSPLY SIRONA Inc." = "XRAY",
+                              "DISH Network Corporation" = "DISH",
+                              "Dollar Tree Inc." = "DLTR",
+                              "eBay Inc. " = "EBAY",
+                              "Electronic Arts Inc." = "EA ",
+                              "Expedia Group Inc." = "EXPE",
+                              "Express Scripts Holding Company" = "ESRX",
+                              "Facebook Inc. " = "FB ",
+                              "Fastenal Company" = "FAST",
+                              "Fiserv Inc." = "FISV",
+                              "Gilead Sciences Inc." = "GILD",
+                              "Hasbro Inc." = "HAS",
+                              "Henry Schein Inc. " = "HSIC",
+                              "Hologic Inc." = "HOLX",
+                              "IDEXX Laboratories Inc." = "IDXX",
+                              "Illumina Inc. " = "ILMN",
+                              "Incyte Corporation" = "INCY",
+                              "Intel Corporation " = "INTC",
+                              "Intuit Inc." = "INTU",
+                              "Intuitive Surgical Inc." = "ISRG",
+                              "J.B. Hunt Transport Services Inc. " = "JBHT",
+                              "JD.com Inc." = "JD ",
+                              "KLA-Tencor Corporation" = "KLAC",
+                              "Lam Research Corporation" = "LRCX",
+                              "Liberty Global plc" = "LBTYA",
+                              "Liberty Global plc" = "LBTYK",
+                              "Marriott International" = "MAR",
+                              "Maxim Integrated Products Inc." = "MXIM",
+                              "MercadoLibre Inc. " = "MELI",
+                              "Microchip Technology Incorporated " = "MCHP",
+                              "Micron Technology Inc." = "MU ",
+                              "Microsoft Corporation " = "MSFT",
+                              "Mondelez International Inc." = "MDLZ",
+                              "Monster Beverage Corporation" = "MNST",
+                              "Mylan N.V." = "MYL",
+                              "NetEase Inc." = "NTES",
+                              "Netflix Inc." = "NFLX",
+                              "NVIDIA Corporation" = "NVDA",
+                              "O'Reilly Automotive Inc." = "ORLY",
+                              "PACCAR Inc." = "PCAR",
+                              "Paychex Inc." = "PAYX",
+                              "PayPal Holdings Inc." = "PYPL",
+                              "QUALCOMM Incorporated " = "QCOM",
+                              "Qurate Retail Group Inc." = "QRTEA",
+                              "Regeneron Pharmaceuticals Inc." = "REGN",
+                              "Ross Stores Inc." = "ROST",
+                              "Seagate Technology PLC" = "STX",
+                              "Shire plc " = "SHPG",
+                              "Sirius XM Holdings Inc." = "SIRI",
+                              "Skyworks Solutions Inc." = "SWKS",
+                              "Starbucks Corporation " = "SBUX",
+                              "Symantec Corporation" = "SYMC",
+                              "Synopsys Inc. " = "SNPS",
+                              "T-Mobile US Inc." = "TMUS",
+                              "Take-Two Interactive Software Inc." = "TTWO",
+                              "Tesla Inc." = "TSLA",
+                              "Texas Instruments Incorporated" = "TXN",
+                              "The Kraft Heinz Company" = "KHC",
+                              "Twenty-First Century Fox Inc. " = "FOX",
+                              "Twenty-First Century Fox Inc. " = "FOXA",
+                              "Ulta Beauty Inc." = "ULTA",
+                              "Verisk Analytics Inc. " = "VRSK",
+                              "Vertex Pharmaceuticals Incorporated" = "VRTX",
+                              "Vodafone Group Plc" = "VOD",
+                              "Walgreens Boots Alliance Inc. " = "WBA",
+                              "Western Digital Corporation" = "WDC",
+                              "Workday Inc." = "WDAY",
+                              "Wynn Resorts Limited" = "WYNN",
+                              "Xilinx Inc." = "XLNX"), 
+                            selected = NULL, 
+                            multiple = FALSE,
+                            selectize = FALSE),
+                
+                helpText("Please note that these are not total returns, but price returns instead (dividends not included), so you might be missing out on more than the app tells you.")
+                
+                
+        ),
+        
+        # Show a plot of the generated distribution
+        mainPanel(
+                h3(textOutput("return")),
+                plotOutput("quantplot", height = "600px")
+        )
+))
